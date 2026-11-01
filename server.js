@@ -14,7 +14,7 @@ const STATE_FILE = path.join(DATA_DIR, 'merit-state.json');
 fs.mkdirSync(TTS_CACHE_DIR, { recursive: true });
 
 // ============================================================================
-// 1. BỘ 18 QUẺ LINH XĂM CHÙA LINH ỨNG (FORTUNE STICKS DECK)
+// 1. BỘ 18 QUẺ LINH XĂM CHÙA SEN VÀNG (FORTUNE STICKS DECK)
 // ============================================================================
 const FORTUNE_DECK = [
   {
@@ -836,7 +836,7 @@ const zeroTts = new ZeroTTSManager();
 
 server.listen(PORT, () => {
   console.log(`============================================================`);
-  console.log(`🪷 CHÙA LINH ỨNG ONLINE ĐÃ KHỞI ĐỘNG`);
+  console.log(`🪷 CHÙA SEN VÀNG ONLINE ĐÃ KHỞI ĐỘNG`);
   console.log(`🪷 Chánh điện: http://localhost:${PORT}`);
   console.log(`🎛️ Bảng điều khiển RPC Admin: http://localhost:${PORT}/admin`);
   console.log(`🔌 JSON-RPC 2.0 Endpoint   : http://localhost:${PORT}/rpc (ws://localhost:${PORT}/ws)`);
