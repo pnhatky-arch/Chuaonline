@@ -1205,3 +1205,54 @@ button:focus-visible,a:focus-visible{outline:2px solid #d7ad68;outline-offset:3p
  .live-pill{font-size:16px}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
+
+
+/* === CHÁNH ĐIỆN 3D: KHÔI PHỤC ĐẠO TRÀNG + CHUYỂN ĐỘNG CÓ CHIỀU SÂU === */
+.stage-wrapper { perspective: 1800px; perspective-origin: 50% 46%; }
+.stage-9x16 { transform-style: preserve-3d; --parallax-x: 0px; --parallax-y: 0px; }
+.sanctuary-bg-img {
+  transform: translate3d(calc(var(--parallax-x) * .10), calc(var(--parallax-y) * .10), -18px) scale(1.035);
+  transition: transform 650ms cubic-bezier(.2,.7,.2,1);
+}
+.buddha-halo-system {
+  transform: translate3d(calc(-50% + var(--parallax-x) * .22), calc(-50% + var(--parallax-y) * .18), 24px);
+  transition: transform 650ms cubic-bezier(.2,.7,.2,1), opacity .35s ease;
+}
+.central-worshipper {
+  transform: translate3d(calc(-50% + var(--parallax-x) * .34), calc(var(--parallax-y) * .24), 72px);
+  animation: worshipperBreath 4.8s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+.central-worshipper.walking-up { animation: centralWalkUpCarpet 2.1s linear forwards; }
+@keyframes worshipperBreath {
+  0%,100% { translate: 0 0; }
+  50% { translate: 0 -5px; }
+}
+.vip-cushions-layer,.congregation-hall,.carpet-walker-layer {
+  display: block !important;
+  transform-style: preserve-3d;
+  transition: transform 650ms cubic-bezier(.2,.7,.2,1);
+}
+.congregation-hall {
+  transform: translate3d(calc(var(--parallax-x) * .30), calc(var(--parallax-y) * .22), 42px);
+}
+.vip-cushions-layer { transform: translate3d(calc(var(--parallax-x) * .34), calc(var(--parallax-y) * .24), 52px); }
+.carpet-walker-layer { transform: translate3d(calc(var(--parallax-x) * .36), calc(var(--parallax-y) * .25), 58px); }
+.hall-seat { animation: devoteeStillness 5.5s ease-in-out infinite; }
+.hall-seat:nth-child(3n) { animation-delay: -1.8s; }
+.hall-seat:nth-child(3n + 1) { animation-delay: -3.4s; }
+.hall-seat .devotee-sprite { transform-origin: 50% 100%; }
+@keyframes devoteeStillness {
+  0%,100% { translate: 0 0; }
+  50% { translate: 0 -2px; }
+}
+.ritual-hotspot { transform: translateZ(34px); }
+.lotus-hand-halo { transform: translate3d(calc(-50% + var(--parallax-x) * .2), calc(-50% + var(--parallax-y) * .16), 28px); }
+.sacred-light-beam { transform: translate3d(calc(-50% + var(--parallax-x) * .12), 0, 18px); }
+@media (hover: hover) and (pointer: fine) {
+  .stage-wrapper { transform-style: preserve-3d; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .central-worshipper,.hall-seat { animation: none !important; }
+  .sanctuary-bg-img,.buddha-halo-system,.congregation-hall,.vip-cushions-layer { transition: none !important; }
+}
