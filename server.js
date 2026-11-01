@@ -240,14 +240,14 @@ class ZeroTTSManager {
 // 3. TRẠNG THÁI CHÙA ONLINE & BẢNG VÀNG CÔNG ĐỨC
 // ============================================================================
 const DEFAULT_STATE = {
-  totalIncense: 108,
-  totalMerit: 1080,
-  woodenFishHits: 360,
-  bellRings: 36,
-  lanternCount: 18,
-  fortuneCount: 12,
-  activeIncenseSticks: 9,
-  haloIntensity: 0.45,
+  totalIncense: 0,
+  totalMerit: 0,
+  woodenFishHits: 0,
+  bellRings: 0,
+  lanternCount: 0,
+  fortuneCount: 0,
+  activeIncenseSticks: 3,
+  haloIntensity: 0.3,
   offerings: {
     lotus: 3,
     fruit: 2,
@@ -836,8 +836,8 @@ const zeroTts = new ZeroTTSManager();
 
 server.listen(PORT, () => {
   console.log(`============================================================`);
-  console.log(`🪷 CHÙA ONLINE TIKTOK LIVE RPC ĐÃ KHỞI ĐỘNG`);
-  console.log(`📺 Màn hình Live (9:16 OBS): http://localhost:${PORT}`);
+  console.log(`🪷 CHÙA LINH ỨNG ONLINE ĐÃ KHỞI ĐỘNG`);
+  console.log(`🪷 Chánh điện: http://localhost:${PORT}`);
   console.log(`🎛️ Bảng điều khiển RPC Admin: http://localhost:${PORT}/admin`);
   console.log(`🔌 JSON-RPC 2.0 Endpoint   : http://localhost:${PORT}/rpc (ws://localhost:${PORT}/ws)`);
   console.log(`============================================================`);
