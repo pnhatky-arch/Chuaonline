@@ -1,7 +1,7 @@
 {
-  "name": "chua-linh-ung-online",
+  "name": "chua-sen-vang-online",
   "version": "1.0.0",
-  "description": "Chùa Linh Ứng Online — không gian chiêm bái và hành lễ trực tuyến",
+  "description": "Chùa Sen Vàng — không gian chiêm bái và hành lễ trực tuyến",
   "main": "server.js",
   "scripts": {
     "start": "bun run server.js",
