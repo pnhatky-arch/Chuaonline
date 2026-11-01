@@ -19,6 +19,27 @@
   window.addEventListener('resize', fitStage);
   fitStage();
 
+  // Parallax 3D nhẹ theo góc nhìn; không dùng WebGL để giữ tương thích iPhone.
+  if (stageWrapper && stage9x16) {
+    let parallaxFrame = 0;
+    stageWrapper.addEventListener('pointermove', (event) => {
+      if (event.pointerType === 'touch' && !event.isPrimary) return;
+      const rect = stageWrapper.getBoundingClientRect();
+      const nx = Math.max(-1, Math.min(1, ((event.clientX - rect.left) / rect.width - 0.5) * 2));
+      const ny = Math.max(-1, Math.min(1, ((event.clientY - rect.top) / rect.height - 0.5) * 2));
+      if (parallaxFrame) cancelAnimationFrame(parallaxFrame);
+      parallaxFrame = requestAnimationFrame(() => {
+        stage9x16.style.setProperty('--parallax-x', (nx * 22).toFixed(1) + 'px');
+        stage9x16.style.setProperty('--parallax-y', (ny * 18).toFixed(1) + 'px');
+        parallaxFrame = 0;
+      });
+    }, { passive: true });
+    stageWrapper.addEventListener('pointerleave', () => {
+      stage9x16.style.setProperty('--parallax-x', '0px');
+      stage9x16.style.setProperty('--parallax-y', '0px');
+    }, { passive: true });
+  }
+
   // 2. Khởi tạo Particle Engine & Audio Engine (ZeroTTS Mai Chi)
   const canvas = document.getElementById('templeCanvas');
   const particles = new window.TempleParticleEngine(canvas);
@@ -187,6 +208,10 @@
       `;
     }).join('');
   }
+
+  // Hiển thị đạo tràng tĩnh ngay cả khi chưa có thí chủ trực tuyến.
+  // Đây là lớp hình ảnh nền, không cộng vào thống kê hay giả lập công đức.
+  renderCongregationHall([]);
 
   // Preload toàn bộ 8 frame nhân vật vào bộ nhớ để chuyển frame mượt 0ms
   const SPRITE_FRAMES = {
