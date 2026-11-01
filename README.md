@@ -1,4 +1,4 @@
-# Chùa Linh Ứng Online
+# Chùa Sen Vàng Online
 
 Không gian chiêm bái và hành lễ trực tuyến, tập trung vào Chánh điện Đức Phật A Di Đà. Giao diện được thiết kế lại theo bố cục gọn, tương thích máy tính và điện thoại.
 
