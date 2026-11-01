@@ -1,5 +1,5 @@
 /**
- * Live 9:16 Client Controller — Chánh Điện Đức Phật A Di Đà & Đạo Tràng Phật Tử Quỳ Lễ
+ * Temple Client Controller — Chánh Điện Đức Phật A Di Đà
  * - Hiển thị 6 Đệm Quỳ VIP (Top 6 Bảng Vàng Công Đức)
  * - Hiển thị 40 Phật Tử mặc áo lam quỳ hai bên thảm đỏ + thẻ tên người xem
  * - Hiệu ứng người xem bước dọc thảm đỏ lên trước Lư Hương Đồng dâng hương
@@ -352,9 +352,16 @@
   function updateUIState(st) {
     if (!st) return;
 
-    document.getElementById('statIncense').textContent = Number(st.totalIncense || 0).toLocaleString('vi-VN');
-    document.getElementById('statMerit').textContent = Number(st.totalMerit || 0).toLocaleString('vi-VN');
-    document.getElementById('statWoodenFish').textContent = Number(st.woodenFishHits || 0).toLocaleString('vi-VN');
+    const incenseTotal = Number(st.totalIncense || 0).toLocaleString('vi-VN');
+    const meritTotal = Number(st.totalMerit || 0).toLocaleString('vi-VN');
+    const fishTotal = Number(st.woodenFishHits || 0).toLocaleString('vi-VN');
+    document.getElementById('statIncense').textContent = incenseTotal;
+    document.getElementById('statMerit').textContent = meritTotal;
+    document.getElementById('statWoodenFish').textContent = fishTotal;
+    const incensePanel = document.getElementById('statIncensePanel');
+    const fishPanel = document.getElementById('statWoodenFishPanel');
+    if (incensePanel) incensePanel.textContent = incenseTotal;
+    if (fishPanel) fishPanel.textContent = fishTotal;
 
     renderIncenseSticks(st.activeIncenseSticks || 9);
 
@@ -392,29 +399,7 @@
         .join('');
     }
 
-    // Trạng thái kết nối TikTok Live
-    const liveDot = document.getElementById('liveDot');
-    const liveText = document.getElementById('liveStatusText');
-    if (st.tiktok?.connected) {
-      liveDot.classList.add('connected');
-      liveText.textContent = `LIVE @${st.tiktok.username} • ${st.tiktok.viewerCount || 0} mắt`;
-    } else if (st.tiktok?.connecting) {
-      liveDot.classList.remove('connected');
-      liveText.textContent = `Đang kết nối @${st.tiktok.username}...`;
-    } else {
-      liveDot.classList.remove('connected');
-      liveText.textContent = st.settings?.autoSim
-        ? 'CHÙA LINH ỨNG • TỰ ĐỘNG GIẢ LẬP ĐÔNG NGƯỜI'
-        : 'CHÙA LINH ỨNG • ĐỨC PHẬT A DI ĐÀ';
-    }
-
-    const btnAutoSim = document.getElementById('btnToggleAutoSim');
-    if (btnAutoSim && st.settings) {
-      btnAutoSim.textContent = st.settings.autoSim
-        ? '🤖 Tự động Giả lập Người Xem: ĐANG BẬT'
-        : '🤖 Tự động Giả lập Người Xem: TẮT';
-      btnAutoSim.classList.toggle('active-toggle', Boolean(st.settings.autoSim));
-    }
+    // Cập nhật âm lượng và trạng thái âm thanh.
     if (st.settings) {
       if (typeof st.settings.musicVolume === 'number') {
         audio.setMusicVolume(st.settings.musicVolume);
@@ -667,10 +652,10 @@
   }
 
   function getFormInput() {
-    const user = document.getElementById('inputDevoteeName')?.value.trim() || 'Quỳnh_Finn';
+    const user = document.getElementById('inputDevoteeName')?.value.trim() || 'Thí chủ hữu duyên';
     const wish =
       document.getElementById('inputDevoteeWish')?.value.trim() ||
-      'Cầu cho gia đình bình an, tài lộc hanh thông';
+      'Nam mô A Di Đà Phật, nguyện cầu bình an và thân tâm an lạc';
     return { user, wish };
   }
 
@@ -716,7 +701,7 @@
     callRpc('temple.drawFortune', { user, topic: wish });
   });
 
-  // Các nút trên Quick RPC Dock bên phải
+  // Các nút nghi thức trên bảng điều khiển
   document.getElementById('btnRpcIncense')?.addEventListener('click', () => {
     const { user, wish } = getFormInput();
     callRpc('temple.burnIncense', { user, count: 3, wish });
@@ -729,7 +714,7 @@
 
   document.getElementById('btnRpcWoodenFish')?.addEventListener('click', () => {
     const { user } = getFormInput();
-    callRpc('temple.strikeWoodenFish', { user, count: 5 });
+    callRpc('temple.strikeWoodenFish', { user, count: 1 });
   });
 
   document.getElementById('btnRpcBell')?.addEventListener('click', () => {
@@ -761,18 +746,6 @@
       giftName: 'Đại Lễ Kim Long Chầu Phật',
       wish
     });
-  });
-
-  document.getElementById('btnConnectTikTok')?.addEventListener('click', () => {
-    const username = document.getElementById('inputTikTokUser')?.value.trim();
-    if (!username) return;
-    callRpc('live.connect', { username });
-  });
-
-  let autoSimState = false;
-  document.getElementById('btnToggleAutoSim')?.addEventListener('click', () => {
-    autoSimState = !autoSimState;
-    callRpc('live.setAutoSim', { enabled: autoSimState });
   });
 
   document.getElementById('btnToggleTts')?.addEventListener('click', (e) => {
