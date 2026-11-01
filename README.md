@@ -1,6 +1,6 @@
 # Chùa Linh Ứng Online
 
-Không gian chiêm bái và hành lễ trực tuyến, tập trung vào Chánh điện Đức Phật A Di Đà. Giao diện được thiết kế lại theo bố cục gọn, tương thích máy tính và điện thoại. Dự án không tích hợp TikTok Live, OBS hoặc luồng tương tác từ nền tảng bên ngoài.
+Không gian chiêm bái và hành lễ trực tuyến, tập trung vào Chánh điện Đức Phật A Di Đà. Giao diện được thiết kế lại theo bố cục gọn, tương thích máy tính và điện thoại.
 
 ## Chức năng chính
 - **Dâng hương và đảnh lễ Tam Bái:** nhân vật Phật tử di chuyển lên Chánh điện và thực hiện nghi thức.
