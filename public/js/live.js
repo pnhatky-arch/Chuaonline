@@ -6,11 +6,6 @@
  * - Giọng đọc ZeroTTS (Mai Chi) + Pháp khí Web Audio
  */
 (function () {
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('obs') === '1') {
-    document.body.classList.add('obs-mode');
-  }
-
   // 1. Tự động co giãn khung 1080x1920 vừa khít Stage Wrapper (9:16)
   const stageWrapper = document.getElementById('stageWrapper');
   const stage9x16 = document.getElementById('stage9x16');
