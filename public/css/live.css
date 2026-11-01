@@ -33,20 +33,6 @@ html, body {
   padding: 12px;
 }
 
-body.obs-mode {
-  background: transparent;
-}
-body.obs-mode .app-workspace {
-  padding: 0;
-  gap: 0;
-}
-body.obs-mode .quick-dock {
-  display: none !important;
-}
-
-/* ==========================================================================
-   KHUNG 9:16 CHUẨN TIKTOK LIVE (1080 x 1920 LOGICAL) — TỐI ƯU HÓA GPU COMPOSITOR
-   ========================================================================== */
 .stage-wrapper {
   position: relative;
   height: 96vh;
@@ -56,12 +42,6 @@ body.obs-mode .quick-dock {
   border: 2px solid rgba(244, 193, 80, 0.55);
   background: #120403;
   contain: layout paint style;
-}
-
-body.obs-mode .stage-wrapper {
-  height: 100vh;
-  border-radius: 0;
-  border: none;
 }
 
 .stage-9x16 {
